@@ -37,7 +37,7 @@ app.post("/webhook", (req, res) => {
 
   // Check the webhook event is from a Page subscription
   if (body.object === "page") {
-    body.entry.forEach(function(entry) {
+    body.entry.forEach(function (entry) {
       // Gets the body of the webhook event
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
@@ -94,7 +94,7 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      text: `You sent the message: "${received_message.text}". Now send me an attachment!`
+      text: `You sent the message: "${received_message.text}". Now send me an attachment!`,
     };
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
@@ -106,25 +106,42 @@ function handleMessage(sender_psid, received_message) {
           template_type: "generic",
           elements: [
             {
-              title: "Is this the right picture?",
-              subtitle: "Tap a button to answer.",
-              image_url: attachment_url,
+              title: "Tour hội an...",
+              subtitle: "Giá...",
+              image_url: "https://www.saigontourist.net/uploads/destination/TrongNuoc/Nhatrang/beach-Bai-Dai_111948560.jpg",
+              default_action: {
+                type: "web_url",
+                url: "https://travel-bot-dtu.herokuapp.com/tours",
+                webview_height_ratio: "tall",
+              },
               buttons: [
                 {
-                  type: "postback",
-                  title: "Yes!",
-                  payload: "yes"
+                  type: "web_url",
+                  url: "https://travel-bot-dtu.herokuapp.com/",
+                  title: "Xem chi tiết",
                 },
                 {
                   type: "postback",
-                  title: "No!",
-                  payload: "no"
-                }
-              ]
-            }
-          ]
-        }
-      }
+                  title: "Chat ngay",
+                  payload: "DEVELOPER_DEFINED_PAYLOAD",
+                },
+              ],
+              // buttons: [
+              //   {
+              //     type: "postback",
+              //     title: "Yes!",
+              //     payload: "yes",
+              //   },
+              //   {
+              //     type: "postback",
+              //     title: "No!",
+              //     payload: "no",
+              //   },
+              // ],
+            },
+          ],
+        },
+      },
     };
   }
 
@@ -152,9 +169,9 @@ function callSendAPI(sender_psid, response) {
   // Construct the message body
   let request_body = {
     recipient: {
-      id: sender_psid
+      id: sender_psid,
     },
-    message: response
+    message: response,
   };
 
   // Send the HTTP request to the Messenger Platform
@@ -163,7 +180,7 @@ function callSendAPI(sender_psid, response) {
       uri: "https://graph.facebook.com/v2.6/me/messages",
       qs: { access_token: PAGE_ACCESS_TOKEN },
       method: "POST",
-      json: request_body
+      json: request_body,
     },
     (err, res, body) => {
       if (!err) {
