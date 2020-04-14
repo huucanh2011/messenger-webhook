@@ -1,24 +1,3 @@
-/**
- * Copyright 2017-present, Facebook, Inc. All rights reserved.
- *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * Messenger Platform Quick Start Tutorial
- *
- * This is the completed code for the Messenger Platform quick start tutorial
- *
- * https://developers.facebook.com/docs/messenger-platform/getting-started/quick-start/
- *
- * To run this code, you must do the following:
- *
- * 1. Deploy this code to a server running Node.js
- * 2. Run `npm install`
- * 3. Update the VERIFY_TOKEN
- * 4. Add your PAGE_ACCESS_TOKEN to your environment vars
- *
- */
-
 "use strict";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
@@ -150,16 +129,13 @@ function handleMessage(sender_psid, received_message) {
 }
 
 function handlePostback(sender_psid, received_postback) {
-  console.log("ok");
   let response;
   // Get the payload for the postback
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === "yes") {
-    response = { text: "Thanks!" };
-  } else if (payload === "no") {
-    response = { text: "Oops, try sending another image." };
+  if (payload === "get_started_action") {
+    response = { text: "Bot xin gửi đến bạn vài tour nổi bật nha!" };
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
@@ -182,9 +158,13 @@ function callSendAPI(sender_psid, response) {
     responseType: "json",
   })
     .then(() => {
-      console.log("ok");
+      console.log("Send message successful!");
     })
     .catch((err) => {
       console.error("Error:" + err);
     });
 }
+
+//Payloads
+
+//get started: get_started_action
