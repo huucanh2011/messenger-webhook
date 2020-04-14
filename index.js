@@ -151,7 +151,7 @@ async function handlePostback(sender_psid, received_postback) {
   if (payload === "get_tour_featured_action") {
     const { data, status } = await callerAPI("https://travel-bot-dtu.herokuapp.com/api/v1/tours-featured");
     if (data && status === 200) {
-      let el = await fetchGenericTour(data);
+      let el = fetchGenericTour(data);
       response = {
         attachment: {
           type: "template",
@@ -211,16 +211,20 @@ function callSendAPI(sender_psid, response) {
 }
 
 function callerAPI(url, method = "GET", data = {}) {
-  return axios({
-    method: method,
-    url: url,
-    data: data,
-    responseType: "json",
-  })
-    .then(() => {
-      console.log("Call api success");
+  return new Promise((reslove, reject) => {
+    axios({
+      method: method,
+      url: url,
+      data: data,
+      responseType: "json",
     })
-    .catch((err) => {
-      console.error("Error:" + err);
-    });
+      .then((res) => {
+        console.log("Call api success");
+        reslove(res);
+      })
+      .catch((err) => {
+        console.error("Error:" + err);
+        reject(err);
+      });
+  });
 }
