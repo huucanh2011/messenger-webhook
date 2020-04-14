@@ -135,7 +135,39 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
   if (payload === "get_started_action") {
-    response = { text: "Bot xin gửi đến bạn vài tour nổi bật nha!" };
+    response = {
+      text: "Xin chào bạn, bot gửi đến bạn vài tour nổi bật nha!",
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: [
+            {
+              title: "Tour hội an...",
+              subtitle: "Giá...",
+              image_url: "https://www.saigontourist.net/uploads/destination/TrongNuoc/Nhatrang/beach-Bai-Dai_111948560.jpg",
+              default_action: {
+                type: "web_url",
+                url: "https://travel-bot-dtu.herokuapp.com/tours",
+                webview_height_ratio: "tall",
+              },
+              buttons: [
+                {
+                  type: "web_url",
+                  url: "https://travel-bot-dtu.herokuapp.com/",
+                  title: "Xem chi tiết",
+                },
+                {
+                  type: "postback",
+                  title: "Tìm kiếm",
+                  payload: "search_action",
+                },
+              ],
+            },
+          ],
+        },
+      },
+    };
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
