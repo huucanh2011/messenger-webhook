@@ -116,7 +116,7 @@ function handleMessage(sender_psid, received_message) {
   callSendAPI(sender_psid, response);
 }
 
-function handlePostback(sender_psid, received_postback) {
+async function handlePostback(sender_psid, received_postback) {
   let response;
   // Get the payload for the postback
   let payload = received_postback.payload;
@@ -149,21 +149,50 @@ function handlePostback(sender_psid, received_postback) {
 
   // Get tour featured
   if (payload === "get_tour_featured_action") {
-    axios({
-      method: "GET",
-      url: "https://travel-bot-dtu.herokuapp.com/api/v1/tours-featured",
-      responseType: "json",
-    })
-      .then((data) => {
-        console.log("Data", data);
-      })
-      .catch((err) => {
-        console.error("Error:" + err);
-      });
+    const { data, status } = await callerAPI("https://travel-bot-dtu.herokuapp.com/api/v1/tours-featured");
+    if (data && status === 200) {
+      let el = await fetchGenericTour(data);
+      response = {
+        attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
+            elements: el,
+          },
+        },
+      };
+    }
   }
 
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
+}
+
+function fetchGenericTour(data = []) {
+  let output = [];
+  let len = data.length;
+
+  for (let i = 0; i < len; i++) {
+    output.push({
+      title: data[i].name,
+      subtitle: data[i].price_defautl,
+      image_url: data[i].image,
+      buttons: [
+        {
+          type: "web_url",
+          url: `https://travel-bot-dtu.herokuapp.com/tour/${data[i].slug}`,
+          title: "Xem chi tiết",
+        },
+        {
+          type: "postback",
+          title: "Tìm kiếm khác",
+          payload: "search_tour_action",
+        },
+      ],
+    });
+  }
+
+  return output;
 }
 
 function callSendAPI(sender_psid, response) {
@@ -176,20 +205,22 @@ function callSendAPI(sender_psid, response) {
   };
 
   // Send the HTTP request to the Messenger Platform
-  axios({
-    method: "POST",
-    url: `https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
-    data: request_body,
+  const url = `https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`;
+
+  callerAPI(url, "POST", request_body);
+}
+
+function callerAPI(url, method = "GET", data = {}) {
+  return axios({
+    method: method,
+    url: url,
+    data: data,
     responseType: "json",
   })
     .then(() => {
-      console.log("Send message successful!");
+      console.log("Call api success");
     })
     .catch((err) => {
       console.error("Error:" + err);
     });
 }
-
-//Payloads
-
-//get started: get_started_action
