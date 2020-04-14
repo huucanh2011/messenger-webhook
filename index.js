@@ -150,16 +150,14 @@ async function handlePostback(sender_psid, received_postback) {
   // Get tour featured
   if (payload === "get_tour_featured_action") {
     const { data, status } = await callerAPI("https://travel-bot-dtu.herokuapp.com/api/v1/tours-featured");
-    console.log(data.data, status);
-
     if (data && status === 200) {
-      let el = fetchGenericTour(data.data);
+      let elements = fetchGenericTour(data.data);
       response = {
         attachment: {
           type: "template",
           payload: {
             template_type: "generic",
-            elements: el,
+            elements: elements,
           },
         },
       };
@@ -177,7 +175,7 @@ function fetchGenericTour(data = []) {
   for (let i = 0; i < len; i++) {
     output.push({
       title: data[i].name,
-      subtitle: data[i].price_defautl,
+      subtitle: data[i].to_place_name + " | " + data[i].number_days + " ngày | " + data[i].price_default + " VND",
       image_url: data[i].image,
       buttons: [
         {
