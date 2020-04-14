@@ -150,6 +150,8 @@ async function handlePostback(sender_psid, received_postback) {
   // Get tour featured
   if (payload === "get_tour_featured_action") {
     const { data, status } = await callerAPI("https://travel-bot-dtu.herokuapp.com/api/v1/tours-featured");
+    console.log(data, status);
+
     if (data && status === 200) {
       let el = fetchGenericTour(data);
       response = {
