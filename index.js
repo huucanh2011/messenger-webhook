@@ -22,7 +22,7 @@
 "use strict";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
-const request = require("request"),
+const axios = require("axios"),
   express = require("express"),
   body_parser = require("body-parser"),
   app = express().use(body_parser.json()); // creates express http server
@@ -175,19 +175,16 @@ function callSendAPI(sender_psid, response) {
   };
 
   // Send the HTTP request to the Messenger Platform
-  request(
-    {
-      uri: "https://graph.facebook.com/v2.6/me/messages",
-      qs: { access_token: PAGE_ACCESS_TOKEN },
-      method: "POST",
-      json: request_body,
-    },
-    (err, res, body) => {
-      if (!err) {
-        console.log("message sent!");
-      } else {
-        console.error("Unable to send message:" + err);
-      }
-    }
-  );
+  axios({
+    method: "POST",
+    url: `https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
+    data: request_body,
+    responseType: "json",
+  })
+    .then(() => {
+      console.log("ok");
+    })
+    .catch((err) => {
+      console.error("Error:" + err);
+    });
 }
