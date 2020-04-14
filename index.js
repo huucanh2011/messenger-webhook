@@ -136,7 +136,7 @@ function handlePostback(sender_psid, received_postback) {
   // Set the response based on the postback payload
   if (payload === "get_started_action") {
     response = {
-      text: "Xin chào bạn, bot gửi đến bạn vài tour nổi bật nha!",
+      // text: "Xin chào bạn, bot gửi đến bạn vài tour nổi bật nha!",
       attachment: {
         type: "template",
         payload: {
