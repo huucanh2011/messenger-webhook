@@ -122,6 +122,7 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
+  // Get started
   if (payload === "get_started_action") {
     response = {
       attachment: {
@@ -145,6 +146,22 @@ function handlePostback(sender_psid, received_postback) {
       },
     };
   }
+
+  // Get tour featured
+  if (payload === "get_tour_featured_action") {
+    axios({
+      method: "GET",
+      url: "https://travel-bot-dtu.herokuapp.com/api/v1/tours-featured",
+      responseType: "json",
+    })
+      .then((data) => {
+        console.log("Data", data);
+      })
+      .catch((err) => {
+        console.error("Error:" + err);
+      });
+  }
+
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
