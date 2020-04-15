@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-const apiUrl = process.env.API_URL;
+const pageUrl = process.env.PAGE_URL;
 
 const callerAPI = (url, method = "GET", data = {}) => {
   return new Promise((reslove, reject) => {
@@ -49,7 +49,7 @@ const fetchGeneric = (data = []) => {
       buttons: [
         {
           type: "web_url",
-          url: `${apiUrl}/tour/${data[i].slug}`,
+          url: `${pageUrl}/tour/${data[i].slug}`,
           title: "Xem chi tiết",
         },
         {

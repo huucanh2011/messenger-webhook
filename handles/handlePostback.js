@@ -1,4 +1,4 @@
-const apiUrl = process.env.API_URL;
+const apiUrl = process.env.PAGE_URL + "/api/v1";
 
 const helpers = require("../helpers");
 
