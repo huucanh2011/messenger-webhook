@@ -1,9 +1,7 @@
 //helpers
-import { callerAPI } from "../helpers/callerApi";
-import { callSendAPI } from "../helpers/callSendApi";
-import { fetchGeneric } from "../helpers/fetchGeneric";
+import helpers from "../helpers";
 
-const handlePostback = async (sender_psid, received_postback) => {
+const handle = async (sender_psid, received_postback) => {
   let response;
   // Get the payload for the postback
   let payload = received_postback.payload;
@@ -41,9 +39,9 @@ const handlePostback = async (sender_psid, received_postback) => {
 
   // Get tour new
   if (payload === "get_tour_new_action") {
-    const { data, status } = await callerAPI(`${apiUrl}/tours-new`);
+    const { data, status } = await helpers.callerAPI(`${apiUrl}/tours-new`);
     if (data && status === 200) {
-      let elements = fetchGeneric(data.data);
+      let elements = helpers.fetchGeneric(data.data);
       response = {
         attachment: {
           type: "template",
@@ -58,9 +56,9 @@ const handlePostback = async (sender_psid, received_postback) => {
 
   // Get tour featured
   if (payload === "get_tour_featured_action") {
-    const { data, status } = await callerAPI(`${apiUrl}/tours-featured`);
+    const { data, status } = await helpers.callerAPI(`${apiUrl}/tours-featured`);
     if (data && status === 200) {
-      let elements = fetchGeneric(data.data);
+      let elements = helpers.fetchGeneric(data.data);
       response = {
         attachment: {
           type: "template",
@@ -133,9 +131,9 @@ const handlePostback = async (sender_psid, received_postback) => {
     const minPrice = 0;
     const maxPrice = 1000000;
     const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
-    const { data, status } = await callerAPI(url);
+    const { data, status } = await helpers.callerAPI(url);
     if (data && status === 200) {
-      let elements = fetchGeneric(data.data);
+      let elements = helpers.fetchGeneric(data.data);
       response = {
         attachment: {
           type: "template",
@@ -153,9 +151,9 @@ const handlePostback = async (sender_psid, received_postback) => {
     const minPrice = 1000000;
     const maxPrice = 3000000;
     const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
-    const { data, status } = await callerAPI(url);
+    const { data, status } = await helpers.callerAPI(url);
     if (data && status === 200) {
-      let elements = fetchGeneric(data.data);
+      let elements = helpers.fetchGeneric(data.data);
       response = {
         attachment: {
           type: "template",
@@ -175,7 +173,7 @@ const handlePostback = async (sender_psid, received_postback) => {
     const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
     const { data, status } = await callerAPI(url);
     if (data && status === 200) {
-      let elements = fetchGeneric(data.data);
+      let elements = helpers.fetchGeneric(data.data);
       response = {
         attachment: {
           type: "template",
@@ -196,7 +194,7 @@ const handlePostback = async (sender_psid, received_postback) => {
   }
 
   // Send the message to acknowledge the postback
-  callSendAPI(sender_psid, response);
+  helpers.callSendAPI(sender_psid, response);
 };
 
-module.exports = { handlePostback };
+module.exports = { handle };

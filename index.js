@@ -5,8 +5,8 @@ const express = require("express"),
   app = express().use(body_parser.json()); // creates express http server
 
 //handles
-import { handleMessage } from "./handles/handleMessage";
-import { handlePostback } from "./handles/handlePostback";
+import handleMessage from "./handles/handleMessage";
+import handlePostback from "./handles/handlePostback";
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log("webhook is listening"));
@@ -54,9 +54,9 @@ app.post("/webhook", (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
-        handleMessage(sender_psid, webhook_event.message);
+        handleMessage.handle(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
-        handlePostback(sender_psid, webhook_event.postback);
+        handlePostback.handle(sender_psid, webhook_event.postback);
       }
     });
     // Return a '200 OK' response to all events
