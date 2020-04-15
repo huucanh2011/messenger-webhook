@@ -1,6 +1,6 @@
 import { callSendAPI } from "../helpers/callSendApi";
 
-module.exports = function handleMessage(sender_psid, received_message) {
+const handleMessage = (sender_psid, received_message) => {
   let response;
 
   // Checks if the message contains text
@@ -15,3 +15,5 @@ module.exports = function handleMessage(sender_psid, received_message) {
   // Send the response message
   callSendAPI(sender_psid, response);
 };
+
+module.exports = { handleMessage };

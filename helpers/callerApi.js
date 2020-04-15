@@ -1,6 +1,6 @@
 import axios from "axios";
 
-module.exports = function callerAPI(url, method = "GET", data = {}) {
+const callerAPI = (url, method = "GET", data = {}) => {
   return new Promise((reslove, reject) => {
     axios({
       method: method,
@@ -18,3 +18,5 @@ module.exports = function callerAPI(url, method = "GET", data = {}) {
       });
   });
 };
+
+module.exports = { callerAPI };

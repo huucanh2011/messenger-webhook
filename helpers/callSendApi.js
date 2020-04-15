@@ -1,8 +1,8 @@
-import { callerAPI } from "./callerApi";
-
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-module.exports = function callSendAPI(sender_psid, response) {
+import { callerAPI } from "./callerApi";
+
+const callSendAPI = (sender_psid, response) => {
   // Construct the message body
   let request_body = {
     recipient: {
@@ -16,3 +16,5 @@ module.exports = function callSendAPI(sender_psid, response) {
 
   callerAPI(url, "POST", request_body);
 };
+
+module.exports = { callSendAPI };

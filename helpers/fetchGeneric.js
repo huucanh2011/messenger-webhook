@@ -1,6 +1,6 @@
 const apiUrl = process.env.API_URL;
 
-module.exports = function fetchGeneric(data = []) {
+const fetchGeneric = (data = []) => {
   let output = [];
   let len = data.length;
 
@@ -26,3 +26,5 @@ module.exports = function fetchGeneric(data = []) {
 
   return output;
 };
+
+module.exports = { fetchGeneric };

@@ -3,7 +3,7 @@ import { callerAPI } from "../helpers/callerApi";
 import { callSendAPI } from "../helpers/callSendApi";
 import { fetchGeneric } from "../helpers/fetchGeneric";
 
-module.exports = async function handlePostback(sender_psid, received_postback) {
+const handlePostback = async (sender_psid, received_postback) => {
   let response;
   // Get the payload for the postback
   let payload = received_postback.payload;
@@ -198,3 +198,5 @@ module.exports = async function handlePostback(sender_psid, received_postback) {
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 };
+
+module.exports = { handlePostback };
