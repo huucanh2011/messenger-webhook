@@ -1,5 +1,5 @@
 //helpers
-import helpers from "../helpers";
+const helpers = require("../helpers");
 
 const handle = async (sender_psid, received_postback) => {
   let response;

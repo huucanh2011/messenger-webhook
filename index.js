@@ -5,8 +5,8 @@ const express = require("express"),
   app = express().use(body_parser.json()); // creates express http server
 
 //handles
-import handleMessage from "./handles/handleMessage";
-import handlePostback from "./handles/handlePostback";
+const handleMessage = require("./handles/handleMessage");
+const handlePostback = require("./handles/handlePostback");
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log("webhook is listening"));
