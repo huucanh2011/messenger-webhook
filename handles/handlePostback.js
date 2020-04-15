@@ -1,4 +1,5 @@
-//helpers
+const apiUrl = process.env.API_URL;
+
 const helpers = require("../helpers");
 
 const handle = async (sender_psid, received_postback) => {
