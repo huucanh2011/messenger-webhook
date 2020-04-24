@@ -196,7 +196,7 @@ const handle = async (sender_psid, received_postback) => {
     const minPrice = 3000000;
     const maxPrice = 5000000;
     const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
-    const { data, status } = await callerAPI(url);
+    const { data, status } = await helpers.callerAPI(url);
     if (data && status === 200) {
       if (data.data.length > 0) {
         let elements = helpers.fetchGeneric(data.data);
@@ -251,7 +251,7 @@ const handle = async (sender_psid, received_postback) => {
   if (payload === "search_tour_to_place_nb_action") {
     const toPlace = 04;
     const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
-    const { data, status } = await callerAPI(url);
+    const { data, status } = await helpers.callerAPI(url);
     if (data && status === 200) {
       if (data.data.length > 0) {
         let elements = helpers.fetchGeneric(data.data);
@@ -276,7 +276,7 @@ const handle = async (sender_psid, received_postback) => {
   if (payload === "search_tour_to_place_dn_action") {
     const toPlace = 07;
     const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
-    const { data, status } = await callerAPI(url);
+    const { data, status } = await helpers.callerAPI(url);
     if (data && status === 200) {
       if (data.data.length > 0) {
         let elements = helpers.fetchGeneric(data.data);
@@ -301,7 +301,7 @@ const handle = async (sender_psid, received_postback) => {
   if (payload === "search_tour_to_place_nt_action") {
     const toPlace = 13;
     const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
-    const { data, status } = await callerAPI(url);
+    const { data, status } = await helpers.callerAPI(url);
     if (data && status === 200) {
       if (data.data.length > 0) {
         let elements = helpers.fetchGeneric(data.data);
