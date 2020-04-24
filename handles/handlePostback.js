@@ -42,16 +42,22 @@ const handle = async (sender_psid, received_postback) => {
   if (payload === "get_tour_new_action") {
     const { data, status } = await helpers.callerAPI(`${apiUrl}/tours-new`);
     if (data && status === 200) {
-      let elements = helpers.fetchGeneric(data.data);
-      response = {
-        attachment: {
-          type: "template",
-          payload: {
-            template_type: "generic",
-            elements: elements,
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
+            },
           },
-        },
-      };
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
+      }
     }
   }
 
@@ -59,16 +65,22 @@ const handle = async (sender_psid, received_postback) => {
   if (payload === "get_tour_featured_action") {
     const { data, status } = await helpers.callerAPI(`${apiUrl}/tours-featured`);
     if (data && status === 200) {
-      let elements = helpers.fetchGeneric(data.data);
-      response = {
-        attachment: {
-          type: "template",
-          payload: {
-            template_type: "generic",
-            elements: elements,
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
+            },
           },
-        },
-      };
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
+      }
     }
   }
 
@@ -134,16 +146,22 @@ const handle = async (sender_psid, received_postback) => {
     const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
     const { data, status } = await helpers.callerAPI(url);
     if (data && status === 200) {
-      let elements = helpers.fetchGeneric(data.data);
-      response = {
-        attachment: {
-          type: "template",
-          payload: {
-            template_type: "generic",
-            elements: elements,
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
+            },
           },
-        },
-      };
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
+      }
     }
   }
 
@@ -154,16 +172,22 @@ const handle = async (sender_psid, received_postback) => {
     const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
     const { data, status } = await helpers.callerAPI(url);
     if (data && status === 200) {
-      let elements = helpers.fetchGeneric(data.data);
-      response = {
-        attachment: {
-          type: "template",
-          payload: {
-            template_type: "generic",
-            elements: elements,
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
+            },
           },
-        },
-      };
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
+      }
     }
   }
 
@@ -174,24 +198,126 @@ const handle = async (sender_psid, received_postback) => {
     const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
     const { data, status } = await callerAPI(url);
     if (data && status === 200) {
-      let elements = helpers.fetchGeneric(data.data);
-      response = {
-        attachment: {
-          type: "template",
-          payload: {
-            template_type: "generic",
-            elements: elements,
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
+            },
           },
-        },
-      };
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
+      }
     }
   }
 
   // search tour to_place action
   if (payload === "search_tour_to_place_action") {
     response = {
-      text: "Bạn tìm điểm đến nào?",
+      type: "template",
+      payload: {
+        template_type: "button",
+        text: "Bạn đến địa điểm nào ạ?",
+        buttons: [
+          {
+            type: "postback",
+            title: "Ninh Bình",
+            payload: "search_tour_to_place_nb_action",
+          },
+          {
+            type: "postback",
+            title: "Đà Nẵng",
+            payload: "search_tour_to_place_dn_action",
+          },
+          {
+            type: "postback",
+            title: "Nha Trang",
+            payload: "search_tour_to_place_nt_action",
+          },
+        ],
+      },
     };
+  }
+
+  // search_tour_to_place_nb_action
+  if (payload === "search_tour_to_place_nb_action") {
+    const toPlace = 04;
+    const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
+    const { data, status } = await callerAPI(url);
+    if (data && status === 200) {
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
+            },
+          },
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
+      }
+    }
+  }
+
+  // search_tour_to_place_dn_action
+  if (payload === "search_tour_to_place_dn_action") {
+    const toPlace = 07;
+    const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
+    const { data, status } = await callerAPI(url);
+    if (data && status === 200) {
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
+            },
+          },
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
+      }
+    }
+  }
+
+  // search_tour_to_place_nt_action
+  if (payload === "search_tour_to_place_nt_action") {
+    const toPlace = 13;
+    const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
+    const { data, status } = await callerAPI(url);
+    if (data && status === 200) {
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
+            },
+          },
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
+      }
+    }
   }
 
   // Send the message to acknowledge the postback

@@ -8,7 +8,7 @@ const handle = (sender_psid, received_message) => {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      text: `Message bạn vừa nhập: "${received_message.text}"`,
+      text: `Tin nhắn bạn vừa gửi: "${received_message.text}"`,
     };
   }
 
