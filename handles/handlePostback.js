@@ -220,27 +220,29 @@ const handle = async (sender_psid, received_postback) => {
   // search tour to_place action
   if (payload === "search_tour_to_place_action") {
     response = {
-      type: "template",
-      payload: {
-        template_type: "button",
-        text: "Bạn đến địa điểm nào ạ?",
-        buttons: [
-          {
-            type: "postback",
-            title: "Ninh Bình",
-            payload: "search_tour_to_place_nb_action",
-          },
-          {
-            type: "postback",
-            title: "Đà Nẵng",
-            payload: "search_tour_to_place_dn_action",
-          },
-          {
-            type: "postback",
-            title: "Nha Trang",
-            payload: "search_tour_to_place_nt_action",
-          },
-        ],
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: "Bạn đến địa điểm nào ạ?",
+          buttons: [
+            {
+              type: "postback",
+              title: "Ninh Bình",
+              payload: "search_tour_to_place_nb_action",
+            },
+            {
+              type: "postback",
+              title: "Đà Nẵng",
+              payload: "search_tour_to_place_dn_action",
+            },
+            {
+              type: "postback",
+              title: "Nha Trang",
+              payload: "search_tour_to_place_nt_action",
+            },
+          ],
+        },
       },
     };
   }
