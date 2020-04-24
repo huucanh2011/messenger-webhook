@@ -249,7 +249,7 @@ const handle = async (sender_psid, received_postback) => {
 
   // search_tour_to_place_nb_action
   if (payload === "search_tour_to_place_nb_action") {
-    const toPlace = 04;
+    const toPlace = "04";
     const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
     const { data, status } = await helpers.callerAPI(url);
     if (data && status === 200) {
@@ -274,7 +274,7 @@ const handle = async (sender_psid, received_postback) => {
 
   // search_tour_to_place_dn_action
   if (payload === "search_tour_to_place_dn_action") {
-    const toPlace = 07;
+    const toPlace = "07";
     const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
     const { data, status } = await helpers.callerAPI(url);
     if (data && status === 200) {
@@ -299,7 +299,7 @@ const handle = async (sender_psid, received_postback) => {
 
   // search_tour_to_place_nt_action
   if (payload === "search_tour_to_place_nt_action") {
-    const toPlace = 13;
+    const toPlace = "13";
     const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
     const { data, status } = await helpers.callerAPI(url);
     if (data && status === 200) {
