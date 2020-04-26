@@ -1,3 +1,5 @@
+"use strict";
+
 const apiUrl = process.env.PAGE_URL + "/api/v1";
 
 const helpers = require("../helpers");
@@ -41,24 +43,22 @@ const handle = async function (sender_psid, received_postback) {
   // Get tour new
   if (payload === "get_tour_new_action") {
     try {
-      const { data, status } = await helpers.callerAPI(`${apiUrl}/tours-new`);
-      if (data && status === 200) {
-        if (data.data.length > 0) {
-          let elements = helpers.fetchGeneric(data.data);
-          response = {
-            attachment: {
-              type: "template",
-              payload: {
-                template_type: "generic",
-                elements: elements,
-              },
+      const { data } = await helpers.callerAPI(`${apiUrl}/tours-new`);
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
             },
-          };
-        } else {
-          response = {
-            text: "Không tìm thấy kết quả!",
-          };
-        }
+          },
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
       }
     } catch (error) {
       console.log(error);
@@ -68,24 +68,22 @@ const handle = async function (sender_psid, received_postback) {
   // Get tour featured
   if (payload === "get_tour_featured_action") {
     try {
-      const { data, status } = await helpers.callerAPI(`${apiUrl}/tours-featured`);
-      if (data && status === 200) {
-        if (data.data.length > 0) {
-          let elements = helpers.fetchGeneric(data.data);
-          response = {
-            attachment: {
-              type: "template",
-              payload: {
-                template_type: "generic",
-                elements: elements,
-              },
+      const { data } = await helpers.callerAPI(`${apiUrl}/tours-featured`);
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
             },
-          };
-        } else {
-          response = {
-            text: "Không tìm thấy kết quả!",
-          };
-        }
+          },
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
       }
     } catch (error) {
       console.log(error);
@@ -153,24 +151,22 @@ const handle = async function (sender_psid, received_postback) {
       const minPrice = 0;
       const maxPrice = 1000000;
       const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
-      const { data, status } = await helpers.callerAPI(url);
-      if (data && status === 200) {
-        if (data.data.length > 0) {
-          let elements = helpers.fetchGeneric(data.data);
-          response = {
-            attachment: {
-              type: "template",
-              payload: {
-                template_type: "generic",
-                elements: elements,
-              },
+      const { data } = await helpers.callerAPI(url);
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
             },
-          };
-        } else {
-          response = {
-            text: "Không tìm thấy kết quả!",
-          };
-        }
+          },
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
       }
     } catch (error) {
       console.log(error);
@@ -183,24 +179,22 @@ const handle = async function (sender_psid, received_postback) {
       const minPrice = 1000000;
       const maxPrice = 3000000;
       const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
-      const { data, status } = await helpers.callerAPI(url);
-      if (data && status === 200) {
-        if (data.data.length > 0) {
-          let elements = helpers.fetchGeneric(data.data);
-          response = {
-            attachment: {
-              type: "template",
-              payload: {
-                template_type: "generic",
-                elements: elements,
-              },
+      const { data } = await helpers.callerAPI(url);
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
             },
-          };
-        } else {
-          response = {
-            text: "Không tìm thấy kết quả!",
-          };
-        }
+          },
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
       }
     } catch (error) {
       console.log(error);
@@ -213,24 +207,22 @@ const handle = async function (sender_psid, received_postback) {
       const minPrice = 3000000;
       const maxPrice = 5000000;
       const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
-      const { data, status } = await helpers.callerAPI(url);
-      if (data && status === 200) {
-        if (data.data.length > 0) {
-          let elements = helpers.fetchGeneric(data.data);
-          response = {
-            attachment: {
-              type: "template",
-              payload: {
-                template_type: "generic",
-                elements: elements,
-              },
+      const { data } = await helpers.callerAPI(url);
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
             },
-          };
-        } else {
-          response = {
-            text: "Không tìm thấy kết quả!",
-          };
-        }
+          },
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
       }
     } catch (error) {
       console.log(error);
@@ -272,24 +264,22 @@ const handle = async function (sender_psid, received_postback) {
     try {
       let toPlace = "04";
       const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
-      const { data, status } = await helpers.callerAPI(url);
-      if (data && status === 200) {
-        if (data.data.length > 0) {
-          let elements = helpers.fetchGeneric(data.data);
-          response = {
-            attachment: {
-              type: "template",
-              payload: {
-                template_type: "generic",
-                elements: elements,
-              },
+      const { data } = await helpers.callerAPI(url);
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
             },
-          };
-        } else {
-          response = {
-            text: "Không tìm thấy kết quả!",
-          };
-        }
+          },
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
       }
     } catch (error) {
       console.log(error);
@@ -301,24 +291,22 @@ const handle = async function (sender_psid, received_postback) {
     try {
       let toPlace = "07";
       const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
-      const { data, status } = await helpers.callerAPI(url);
-      if (data && status === 200) {
-        if (data.data.length > 0) {
-          let elements = helpers.fetchGeneric(data.data);
-          response = {
-            attachment: {
-              type: "template",
-              payload: {
-                template_type: "generic",
-                elements: elements,
-              },
+      const { data } = await helpers.callerAPI(url);
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
             },
-          };
-        } else {
-          response = {
-            text: "Không tìm thấy kết quả!",
-          };
-        }
+          },
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
       }
     } catch (error) {
       console.log(error);
@@ -330,24 +318,22 @@ const handle = async function (sender_psid, received_postback) {
     try {
       let toPlace = "13";
       const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
-      const { data, status } = await helpers.callerAPI(url);
-      if (data && status === 200) {
-        if (data.data.length > 0) {
-          let elements = helpers.fetchGeneric(data.data);
-          response = {
-            attachment: {
-              type: "template",
-              payload: {
-                template_type: "generic",
-                elements: elements,
-              },
+      const { data } = await helpers.callerAPI(url);
+      if (data.data.length > 0) {
+        let elements = helpers.fetchGeneric(data.data);
+        response = {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              elements: elements,
             },
-          };
-        } else {
-          response = {
-            text: "Không tìm thấy kết quả!",
-          };
-        }
+          },
+        };
+      } else {
+        response = {
+          text: "Không tìm thấy kết quả!",
+        };
       }
     } catch (error) {
       console.log(error);
