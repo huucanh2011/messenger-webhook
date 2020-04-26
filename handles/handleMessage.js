@@ -1,4 +1,4 @@
-const helpers = require("../helpers").default;
+const helpers = require("../helpers");
 
 const handle = (sender_psid, received_message) => {
   let response;
