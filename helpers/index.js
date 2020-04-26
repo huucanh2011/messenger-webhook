@@ -35,7 +35,7 @@ const callSendAPI = (sender_psid, response) => {
   // Send the HTTP request to the Messenger Platform
   const url = `https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`;
 
-  return axios.post(url, request_body);
+  axios.post(url, request_body);
 };
 
 const fetchGeneric = (data = []) => {
