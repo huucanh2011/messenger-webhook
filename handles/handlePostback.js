@@ -1,5 +1,3 @@
-"use strict";
-
 const apiUrl = process.env.PAGE_URL + "/api/v1";
 
 const helpers = require("../helpers");
@@ -42,8 +40,8 @@ const handle = async function (sender_psid, received_postback) {
 
   // Get tour new
   if (payload === "get_tour_new_action") {
-    try {
-      const { data } = await helpers.callerAPI(`${apiUrl}/tours-new`);
+    const { data, status } = await helpers.callerAPI(`${apiUrl}/tours-new`);
+    if (data && status === 200) {
       if (data.data.length > 0) {
         let elements = helpers.fetchGeneric(data.data);
         response = {
@@ -60,15 +58,13 @@ const handle = async function (sender_psid, received_postback) {
           text: "Không tìm thấy kết quả!",
         };
       }
-    } catch (error) {
-      console.log(error);
     }
   }
 
   // Get tour featured
   if (payload === "get_tour_featured_action") {
-    try {
-      const { data } = await helpers.callerAPI(`${apiUrl}/tours-featured`);
+    const { data, status } = await helpers.callerAPI(`${apiUrl}/tours-featured`);
+    if (data && status === 200) {
       if (data.data.length > 0) {
         let elements = helpers.fetchGeneric(data.data);
         response = {
@@ -85,8 +81,6 @@ const handle = async function (sender_psid, received_postback) {
           text: "Không tìm thấy kết quả!",
         };
       }
-    } catch (error) {
-      console.log(error);
     }
   }
 
@@ -147,11 +141,11 @@ const handle = async function (sender_psid, received_postback) {
 
   //search tour 1m action
   if (payload === "search_tour_1m_action") {
-    try {
-      const minPrice = 0;
-      const maxPrice = 1000000;
-      const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
-      const { data } = await helpers.callerAPI(url);
+    const minPrice = 0;
+    const maxPrice = 1000000;
+    const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
+    const { data, status } = await helpers.callerAPI(url);
+    if (data && status === 200) {
       if (data.data.length > 0) {
         let elements = helpers.fetchGeneric(data.data);
         response = {
@@ -168,18 +162,16 @@ const handle = async function (sender_psid, received_postback) {
           text: "Không tìm thấy kết quả!",
         };
       }
-    } catch (error) {
-      console.log(error);
     }
   }
 
   //search tour 3m action
   if (payload === "search_tour_3m_action") {
-    try {
-      const minPrice = 1000000;
-      const maxPrice = 3000000;
-      const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
-      const { data } = await helpers.callerAPI(url);
+    const minPrice = 1000000;
+    const maxPrice = 3000000;
+    const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
+    const { data, status } = await helpers.callerAPI(url);
+    if (data && status === 200) {
       if (data.data.length > 0) {
         let elements = helpers.fetchGeneric(data.data);
         response = {
@@ -196,18 +188,16 @@ const handle = async function (sender_psid, received_postback) {
           text: "Không tìm thấy kết quả!",
         };
       }
-    } catch (error) {
-      console.log(error);
     }
   }
 
   //search tour 5m action
   if (payload === "search_tour_5m_action") {
-    try {
-      const minPrice = 3000000;
-      const maxPrice = 5000000;
-      const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
-      const { data } = await helpers.callerAPI(url);
+    const minPrice = 3000000;
+    const maxPrice = 5000000;
+    const url = `${apiUrl}/chatbot/getTourByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
+    const { data, status } = await helpers.callerAPI(url);
+    if (data && status === 200) {
       if (data.data.length > 0) {
         let elements = helpers.fetchGeneric(data.data);
         response = {
@@ -224,8 +214,6 @@ const handle = async function (sender_psid, received_postback) {
           text: "Không tìm thấy kết quả!",
         };
       }
-    } catch (error) {
-      console.log(error);
     }
   }
 
@@ -261,10 +249,10 @@ const handle = async function (sender_psid, received_postback) {
 
   // search_tour_to_place_nb_action
   if (payload === "search_tour_to_place_nb_action") {
-    try {
-      let toPlace = "04";
-      const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
-      const { data } = await helpers.callerAPI(url);
+    let toPlace = "04";
+    const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
+    const { data, status } = await helpers.callerAPI(url);
+    if (data && status === 200) {
       if (data.data.length > 0) {
         let elements = helpers.fetchGeneric(data.data);
         response = {
@@ -281,17 +269,15 @@ const handle = async function (sender_psid, received_postback) {
           text: "Không tìm thấy kết quả!",
         };
       }
-    } catch (error) {
-      console.log(error);
     }
   }
 
   // search_tour_to_place_dn_action
   if (payload === "search_tour_to_place_dn_action") {
-    try {
-      let toPlace = "07";
-      const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
-      const { data } = await helpers.callerAPI(url);
+    let toPlace = "07";
+    const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
+    const { data, status } = await helpers.callerAPI(url);
+    if (data && status === 200) {
       if (data.data.length > 0) {
         let elements = helpers.fetchGeneric(data.data);
         response = {
@@ -308,17 +294,15 @@ const handle = async function (sender_psid, received_postback) {
           text: "Không tìm thấy kết quả!",
         };
       }
-    } catch (error) {
-      console.log(error);
     }
   }
 
   // search_tour_to_place_nt_action
   if (payload === "search_tour_to_place_nt_action") {
-    try {
-      let toPlace = "13";
-      const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
-      const { data } = await helpers.callerAPI(url);
+    let toPlace = "13";
+    const url = `${apiUrl}/chatbot/getTourByDestination?toPlace=${toPlace}`;
+    const { data, status } = await helpers.callerAPI(url);
+    if (data && status === 200) {
       if (data.data.length > 0) {
         let elements = helpers.fetchGeneric(data.data);
         response = {
@@ -335,8 +319,6 @@ const handle = async function (sender_psid, received_postback) {
           text: "Không tìm thấy kết quả!",
         };
       }
-    } catch (error) {
-      console.log(error);
     }
   }
 
