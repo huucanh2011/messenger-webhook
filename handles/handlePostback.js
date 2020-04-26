@@ -2,7 +2,7 @@ const apiUrl = process.env.PAGE_URL + "/api/v1";
 
 const helpers = require("../helpers");
 
-const handle = async function (sender_psid, received_postback) {
+const handle = function (sender_psid, received_postback) {
   let response;
   // Get the payload for the postback
   let payload = received_postback.payload;
@@ -40,8 +40,7 @@ const handle = async function (sender_psid, received_postback) {
 
   // Get tour new
   if (payload === "get_tour_new_action") {
-    const { data, status } = await helpers.callerAPI(`${apiUrl}/tours-new`);
-    if (data && status === 200) {
+    helpers.callerAPI(`${apiUrl}/tours-new`).then(({data}) => {
       if (data.data.length > 0) {
         let elements = helpers.fetchGeneric(data.data);
         response = {
@@ -58,7 +57,7 @@ const handle = async function (sender_psid, received_postback) {
           text: "Không tìm thấy kết quả!",
         };
       }
-    }
+    })
   }
 
   // Get tour featured
