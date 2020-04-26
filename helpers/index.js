@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from "axios";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const pageUrl = process.env.PAGE_URL;
@@ -64,4 +64,4 @@ const fetchGeneric = (data = []) => {
   return output;
 };
 
-module.exports = { callerAPI, callSendAPI, fetchGeneric };
+export default { callerAPI, callSendAPI, fetchGeneric };
