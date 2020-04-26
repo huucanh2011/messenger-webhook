@@ -55,7 +55,7 @@ app.post("/webhook", (req, res) => {
 
       // Handle event message - don't use
       if (webhook_event.message) {
-        // handleMessage.handle(sender_psid, webhook_event.message);
+        handleMessage.handle(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
         handlePostback.handle(sender_psid, webhook_event.postback);
       }
