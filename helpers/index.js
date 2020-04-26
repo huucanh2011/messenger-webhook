@@ -4,13 +4,11 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const pageUrl = process.env.PAGE_URL;
 
 const callerAPI = (url, method = "GET", data = {}) => {
-  return new Promise((reslove, reject) => {
-    axios({
-      method: method,
-      url: url,
-      data: data,
-      responseType: "json",
-    });
+  return axios({
+    method: method,
+    url: url,
+    data: data,
+    responseType: "json",
   });
 };
 
