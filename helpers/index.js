@@ -4,16 +4,14 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const pageUrl = process.env.PAGE_URL;
 
 const callerAPI = (url, method = "GET", data = {}) => {
-  return new Promise((reslove, reject) => {
-    axios({
-      method: method,
-      url: url,
-      data: data,
-      responseType: "json",
-    }).then((res) => {
-      console.log("Call api success");
-      reslove(res);
-    });
+  return axios({
+    method: method,
+    url: url,
+    data: data,
+    responseType: "json",
+    headers: {
+      "Content-type": "application/json",
+    },
   });
 };
 
@@ -29,7 +27,7 @@ const callSendAPI = (sender_psid, response) => {
   // Send the HTTP request to the Messenger Platform
   const url = `https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`;
 
-  callerAPI(url, "POST", request_body);
+  return axios.post(url, request_body);
 };
 
 const fetchGeneric = (data = []) => {
