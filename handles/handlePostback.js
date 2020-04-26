@@ -41,6 +41,8 @@ const handle = async (sender_psid, received_postback) => {
   // Get tour new
   if (payload === "get_tour_new_action") {
     const { data, status } = await helpers.callerAPI(`${apiUrl}/tours-new`);
+    console.log(data);
+
     if (data && status === 200) {
       if (data.data.length > 0) {
         let elements = helpers.fetchGeneric(data.data);
